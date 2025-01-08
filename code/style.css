@@ -1,0 +1,413 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Orbitron:wght@400..900&family=Oswald:wght@200..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  
+}
+
+.header {
+  font-size: 1.35rem;
+  text-align: center;
+  color: #fff;
+  padding-bottom: 50px ;
+  margin-bottom:5px;
+  background-color: rgba(24, 24, 27, 0.6);
+  position:sticky;
+}
+
+body {
+  background-image: url('bg-image.jpg'); 
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  background-attachment: fixed;
+  /*this fixed the error and now the image will be showing on the whole page rather than cutting at half(remove it and check responsiveness in chrome tools)*/
+  position:relative;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('bg-image.jpg'); 
+  background-size: 110% auto;
+  background-repeat: repeat-x; 
+  /* background-attachment: fixed; */
+  background-position: 0 0;
+  z-index: -1; 
+  animation: scrollBackground 10s linear infinite;
+  
+}
+
+.container {
+  display: flex;
+  gap: 35px;
+  padding: 30px;
+  
+}
+
+/* search button */
+.InputContainer {
+  width: 550px;
+  height: 60px;
+  margin: 10px 0 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(rgba(24, 24, 27, 0.6), rgba(211, 211, 211, 0.6));
+  border-radius: 30px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.075);
+}
+
+.city-input:focus{
+  width:100%;
+}
+
+.city-input {
+  width: 540px;
+  height: 50px;
+  border: none;
+  outline: none;
+  caret-color: rgb(255, 81, 0);
+  background-color: rgb(255, 255, 255);
+  border-radius: 30px;
+  padding-left: 15px;
+  letter-spacing: 0.8px;
+  color: rgb(19, 19, 19);
+  font-size: 13.4px;
+  transition: width 0.4s ease;
+}
+
+.weather-input button {
+  width: 100%;
+  padding: 10px 0;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  background-color: rgba(24, 24, 27, 0.6);
+  font-size: 1rem;
+  border: 1px solid white;
+}
+
+.weather-input .search-btn:hover {
+  background: rgba(24, 24, 27, 1);
+}
+
+.weather-input .separator {
+  height: 1px;
+  width: 100%;
+  margin: 25px 0;
+  background: #171616;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.weather-input .separator::before {
+  content: "or";
+  font-size: 1.18rem;
+  padding: 0 15px;
+  background: #fff;
+  margin-top: -4px
+}
+
+.weather-input .location-btn {
+  background: rgba(211, 211, 211, 0.6);
+  color: #171616
+}
+
+.weather-input .location-btn:hover {
+  background: rgba(211, 211, 211, 1);
+}
+
+.weather-data {
+  width: 100%;
+}
+
+.current-weather {
+  color: #fff;
+  display: flex;
+  border-radius: 5px;
+  padding: 20px 70px 20px 20px;
+  background: rgba(24, 24, 27, 0.6);
+  border: 1px solid#eee;
+  justify-content: space-between;
+}
+
+.current-weather h2 {
+  font-size: 1.7rem;
+}
+
+.current-weather h4 {
+  margin-top: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.current-weather .icon  {
+  text-align: center;
+}
+
+.current-weather .icon img {
+  max-width: 120px;
+  margin-top: -15px;
+}
+
+.current-weather .icon h4 {
+  margin-top: -10px;
+  text-transform: capitalize;
+}
+
+.days-forecast h2 {
+  font-size: 1.2rem;
+  margin: 20px 0;
+}
+
+.weather-cards {
+  display: flex;
+  gap: 20px 20px;
+
+}
+
+.weather-cards .card {
+  list-style: none;
+  background: rgba(24, 24, 27, 0.6);
+  color: #fff;
+  padding: 18px 16px;
+  border-radius: 5px;
+  width: calc(100%/5);
+  border: 1px solid white;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.weather-cards .card:hover {
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+  transform: translateY(-5px);
+}
+
+.weather-cards .card img {
+  max-width: 70px;
+  margin: 5px 0 -12px 0;
+}
+
+.weather-cards .card h4 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+
+#weatherMap{
+  height: 500px;
+  width: 80%;
+  padding: 100px 100px;
+  margin: 50px 50px;
+  border-radius: 10px;
+}
+
+.abc{
+  background-color: white;
+}
+
+.about_us{
+  font-size: 2rem;
+  text-align: center;
+  text-decoration:underline;
+  margin-bottom: 25px;
+  
+}
+.content{
+  margin:5px;
+
+}
+
+.footer{
+  background-color:rgba(24, 24, 27, 0.6) ;
+  color: #eee;
+  position:relative;
+  justify-content: space-between;
+  padding:10px 20px;
+  display:flex;
+  align-items: center;
+  
+}
+.footer-left {
+  display: flex;
+  align-items: center;
+}
+
+.footer-left img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.footer-left p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.footer-right {
+  display: flex;
+  gap: 10px;
+}
+
+
+/* From Uiverse.io by aadium */ 
+.social-buttons {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 15px black;
+  padding: 15px 10px;
+  border-radius: 5em;
+}
+
+.social-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 0 10px;
+  background-color: #fff;
+  box-shadow: 0px 0px 4px #00000027;
+  transition: 0.3s;
+}
+
+.social-button:hover {
+  background-color: #f2f2f2;
+  box-shadow: 0px 0px 6px 3px #00000027;
+}
+
+.social-buttons svg {
+  transition: 0.3s;
+  height: 20px;
+}
+
+.facebook {
+  background-color: #3b5998;
+}
+
+.facebook svg {
+  fill: #f2f2f2;
+}
+
+.facebook:hover svg {
+  fill: #3b5998;
+}
+
+.github {
+  background-color: #333;
+}
+
+.github svg {
+  width: 25px;
+  height: 25px;
+  fill: #f2f2f2;
+}
+
+.github:hover svg {
+  fill: #333;
+}
+
+.linkedin {
+  background-color: #0077b5;
+}
+
+.linkedin svg {
+  fill: #f2f2f2;
+}
+
+.linkedin:hover svg {
+  fill: #0077b5;
+}
+
+.instagram {
+  background-color: #c13584;
+}
+
+.instagram svg {
+  fill: #f2f2f2;
+}
+
+.instagram:hover svg {
+  fill: #c13584;
+}
+
+@media (max-width: 1400px) {
+  .weather-data .current-weather {
+    padding: 20px;
+  }
+
+  .weather-cards {
+    flex-wrap: wrap;
+  }
+
+  .weather-cards .card {
+    width: calc(100% / 4 - 15px);
+  }
+}
+
+@media (max-width: 1200px) {
+  .weather-cards .card {
+    width: calc(100% / 3 - 15px);
+  }
+}
+
+@media (max-width: 950px) {
+  .weather-input {
+    width: 450px;
+  }
+
+  .weather-cards .card {
+    width: calc(100% / 2 - 10px);
+  }
+}
+
+@media (max-width: 750px) {
+  h1 {
+    font-size: 1.45rem;
+    padding: 16px 0;
+  }
+
+  .container {
+    flex-wrap: wrap;
+    padding: 15px;
+  }
+
+  .weather-input {
+    width: 100%;
+  }
+.InputContainer{
+  width:100%
+}
+.input{
+  width:98%
+}
+  .weather-data h2 {
+    font-size: 1.35rem;
+  }
+}
+
+@keyframes scrollBackground {
+  from {
+    background-position: 0 0; 
+  }
+  to {
+    background-position: 100% 0; 
+  }
+}
